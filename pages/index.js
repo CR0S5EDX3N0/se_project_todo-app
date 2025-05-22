@@ -1,5 +1,5 @@
-import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 import { initialTodos, validationConfig } from "../utils/constants.js"
+import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
@@ -78,7 +78,6 @@ addTodoForm.addEventListener("submit", (evt) => {
   
   const todo = generateTodo(values);
   todosList.append(todo);
-  todoFormValidator.resetValidation();
   closeModal(addTodoPopup);
 });
 
