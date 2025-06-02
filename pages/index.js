@@ -1,9 +1,11 @@
-import { initialTodos, validationConfig } from "../utils/constants.js"
+import { Todo } from "../components/Todo.js";
+import { initialTodos, validationConfig } from "../utils/constants.js";
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
+
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopup = document.querySelector("#add-todo-popup");
-const addTodoForm = addTodoPopup.querySelector(".popup__form");
+const addTodoForm = document.forms["add-todo-form"];
 const addTodoCloseBtn = addTodoPopup.querySelector(".popup__close");
 const todoTemplate = document.querySelector("#todo-template");
 const todosList = document.querySelector(".todos__list");
@@ -31,7 +33,7 @@ const generateTodo = (data) => {
   const todoDeleteBtn = todoElement.querySelector(".todo__delete-btn");
 
   todoNameEl.textContent = data.name;
-  todoCheckboxEl.checked = data.completed;
+  todoCheckboxEl.checked = data._isCompleted;
 
   // Apply id and for attributes.
   // The id will initially be undefined for new todos.
@@ -76,9 +78,12 @@ addTodoForm.addEventListener("submit", (evt) => {
     completed: false
   };
   
-  const todo = generateTodo(values);
+  const renderTodo = (item) => {
+  const todo = generateTodo(item);
   todosList.append(todo);
-  closeModal(addTodoPopup);
+  };
+
+  renderTodo(values);
 });
 
 addTodoCloseBtn.addEventListener("click", () => {
