@@ -78,11 +78,6 @@ addTodoForm.addEventListener("submit", (evt) => {
     completed: false
   };
   
-  const renderTodo = (item) => {
-  const todo = generateTodo(item);
-  todosList.append(todo);
-  };
-
   renderTodo(values);
 });
 
@@ -92,4 +87,7 @@ addTodoCloseBtn.addEventListener("click", () => {
 initialTodos.forEach((item) => {
   const todo = generateTodo(item);
   todosList.append(todo);
+  renderTodo(item);
 });
+
+const formValidator = new FormValidator(validationConfig, addTodoForm);

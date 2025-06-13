@@ -33,29 +33,33 @@ export default class FormValidator {
     errorElement.classList.remove(this._settings.errorClass);
     }
     resetValidation() {
-        this._inputList = Array.from(
-            this._formElement.querySelectorAll(this._settings.inputSelector)
-        );
+        
         
         this._inputList.forEach((inputElement) => {
             this._hideInputError(inputElement);
         });
 
-        this._buttonElement = this._formElement.querySelector(
-            this._settings.submitButtonSelector
-        );
+        
 
         this._toggleButtonState();
         this._formElement.reset();
     }
 
     _setEventListeners() {
+        this._buttonElement = this._formElement.querySelector(
+            this._settings.submitButtonSelector
+        );
+
+        this._inputList = Array.from(
+            this._formElement.querySelectorAll(this._settings.inputSelector)
+        );
+
          this._inputList.forEach((inputElement) => {
             inputElement.addEventListener("input", () =>{
                 this._checkInputValidity(inputElement);
-                this._toggleButtonState();
             });
          });
+         this._toggleButtonState();
     }
 
     _hasInvalidInput() {
@@ -73,8 +77,9 @@ export default class FormValidator {
 }
 
     enableValidation() {
-        this.resetValidation();
-        this._checkInputValidity(inputElement ,this._formElement);
+        this._formElement.addEventListener("submit", (evt) => {
+      evt.preventDefault();
+    });
         this._setEventListeners();
     }
 }
