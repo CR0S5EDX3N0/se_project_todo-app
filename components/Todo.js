@@ -1,6 +1,8 @@
 export class Todo {
-    constructor(todoData, templateSelector) {
+    constructor(data, templateSelector) {
+        this._data = data;
         this._name = todoData.name;
+        this._templateElement = document.querySelector("selector");
         this._id = todoData.id;
         this._isCompleted = todoData.isCompleted;
         this._date = todoData.date;
@@ -42,3 +44,5 @@ export class Todo {
         });
     }
 }
+
+export default Todo;
