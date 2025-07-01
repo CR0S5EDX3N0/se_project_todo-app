@@ -80,14 +80,18 @@ addTodoForm.addEventListener("submit", (evt) => {
     completed: false
   };
   
-  renderTodo(values);
+  const renderTodo = (item) => {
+  const todo = generateTodo(item);
+  todosList.append(todo);
+};
+ resetValidation();
 });
 
 addTodoCloseBtn.addEventListener("click", () => {
   closeModal(addTodoPopup);
 });
 initialTodos.forEach((item) => {
-  const todo = generateTodo(item);
+ renderTodo = generateTodo(item);
   todosList.append(todo);
   renderTodo(item);
 });
