@@ -19,7 +19,7 @@ const initialTodos = [
   },
 ];
 
-validationConfig = {
+const validationConfig = {
   formSelector: ".popupform",
   inputSelector: ".popupinput",
   submitButtonSelector: ".popupbutton",
