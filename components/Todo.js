@@ -1,41 +1,43 @@
 export class Todo {
     constructor(data, selector) {
-        this.data = data;
+        this._data = data;
         this._templateElement = document.querySelector(selector);
     }
 
     _generateCheckBoxEl() {
-        this._checkbox.checked = this._isCompleted;
-        this._checkbox = this._element.querySelector(".todo__completed"); 
-        this._checkbox = `todo-${this._data.id}`;
-        todoLabel.setAttribute("for", `todo-${this._data.id}`);
-        todoLabel.setAttribute("for", this._id);
+        this._todoCheckboxEl = this._todoElement.querySelector(".todo__completed");
+        this._todoLabel = this._todoElement.querySelector(".todo__label");
+        this._todoCheckboxEl.checked = this._data.completed;
+        this._todoCheckboxEl.id = `todo-${this._data.id}`;
+        this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
     }
 
     getView() {
-        this._templateElement = this._templateElement.content
+        this._todoElement = this._templateElement.content
         .querySelector(".todo")
         .cloneNode(true);
         
-        const TodoNameEl = this._todoElement.querySelector(".todo__name");
-        const todoDate = this.todoELement.querySelector(".todo__date");
-        const todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
+        const todoNameEl = this._todoElement.querySelector(".todo__name");
+        const todoDate = this._todoElement.querySelector(".todo__date");
+        this._todoDeleteBtn = this._todoElement.querySelector(".todo__delete-btn");
 
         todoNameEl.textContent = this._data.name;
+        todoDate.textContent = this._data.date.toDateString();
 
         this._generateCheckBoxEl();
         this._setEventListeners();
+
+        return this._todoElement;
     }
 
     _setEventListeners() {
-        this._checkbox.addEventListener("change", () => {
-            this._handleCompletedClick();
+        this._todoCheckboxEl.addEventListener("change", () => {
+            this._data.completed = !this._data.completed;
         });
 
-        const deleteButton = this._element.querySelector(".todo__delete-btn");
-        deleteButton.addEventListener("click", () => {
-            this._handleDeleteClick();
-        });
+        this._todoDeleteBtn.addEventListener("click", () => {
+            this._todoElement.remove();
+        })
     }
 
 
