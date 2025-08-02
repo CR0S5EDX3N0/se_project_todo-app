@@ -38,8 +38,8 @@ export class FormValidator {
       this._hideInputError(inputElement);
     });
 
-    this._toggleButtonState();
     this._formElement.reset();
+this._toggleButtonState(); 
   }
 
   _setEventListeners() {
@@ -53,10 +53,10 @@ export class FormValidator {
 
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
-        this._checkInputValidity(inputElement);
-      });
+  this._checkInputValidity(inputElement);
+  this._toggleButtonState();
+});
     });
-    this._toggleButtonState();
   }
 
   _hasInvalidInput() {

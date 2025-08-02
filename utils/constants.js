@@ -20,10 +20,10 @@ const initialTodos = [
 ];
 
 const validationConfig = {
-  formSelector: ".popupform",
-  inputSelector: ".popupinput",
-  submitButtonSelector: ".popupbutton",
-  errorClass: "popuperror_visible",
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  errorClass: "popup__error_visible",
   inputErrorClass: "popup__input_type_error",
   inactiveButtonClass: "button_disabled",
 };
