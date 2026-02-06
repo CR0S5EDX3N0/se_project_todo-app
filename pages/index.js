@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
+import TodoCounter from "../components/TodoCounter.js";
 
 const addTodoButton = document.querySelector(".button_action_add");
 const addTodoPopupEl = document.querySelector("#add-todo-popup");
@@ -26,6 +27,7 @@ const addTodoPopup = new PopupWithForm({
     const todoData = { name, date, id };
     const todo = generateTodo(todoData);
     section.addItem(todo);
+    todoCounter.updateTotal(true);
 
     newTodoValidator.resetValidation();
     addTodoPopup.close();
@@ -61,6 +63,8 @@ addTodoButton.addEventListener("click", () => {
 addTodoCloseBtn.addEventListener("click", () => {
   addTodoPopup.close();
 });
+
+const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 
 
 newTodoValidator.enableValidation();
