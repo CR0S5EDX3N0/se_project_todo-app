@@ -36,7 +36,7 @@ const addTodoPopup = new PopupWithForm({
 
 addTodoPopup.setEventListeners();
 const generateTodo = (data) => {
-  const todo = new Todo(data, "#todo-template");
+  const todo = new Todo(data, "#todo-template", handleCheck, handleDelete);
 
   return todo.getView();
 };
@@ -63,6 +63,16 @@ addTodoButton.addEventListener("click", () => {
 addTodoCloseBtn.addEventListener("click", () => {
   addTodoPopup.close();
 });
+
+function handleCheck(completed) {
+    todoCounter.updateCompleted(completed);
+  }
+
+  function handleDelete(completed) {
+    if (completed) {
+      todoCounter.updateCompleted(false);
+    }
+  }
 
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
 

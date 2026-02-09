@@ -1,8 +1,9 @@
-import TodoCounter from "./TodoCounter.js";
 export class Todo {
-    constructor(data, selector) {
+    constructor(data, selector, handleCheck, handleDelete) {
         this._data = data;
         this._templateElement = document.querySelector(selector);
+        this._handleCheck = handleCheck;
+        this._handleDelete = handleDelete;
     }
 
     _generateCheckBoxEl() {
@@ -43,20 +44,23 @@ export class Todo {
     _setEventListeners() {
         this._todoCheckboxEl.addEventListener("change", () => {
             this._data.completed = !this._data.completed;
-            TodoCounter.updateCompleted(this._data.completed);
-            TodoCounter.updateTotal(false);
+            this._toggleCompletion();
+            this._handleCheck(this._completed);
         });
 
         this._todoDeleteBtn.addEventListener("click", () => {
             this._todoElement.remove();
-            TodoCounter.updateTotal(false);
-            if (this._data.completed) {
-                TodoCounter.updateCompleted(false);
-            }   
+           this._handleDelete(this._completed);   
         });
     }
 
+    _toggleCompletion() {
+        this._completed = !this._completed;
+    }
 
+    _remove() {
+        this._element.remove();
+    }
 }
 
 export default Todo;
