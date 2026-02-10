@@ -12,6 +12,7 @@ export class Todo {
         this._todoCheckboxEl.checked = this._data.completed;
         this._todoCheckboxEl.id = `todo-${this._data.id}`;
         this._todoLabel.setAttribute("for", `todo-${this._data.id}`);
+        this._complete = this._data.completed; 
     }
 
     getView() {

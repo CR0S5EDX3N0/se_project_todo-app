@@ -72,6 +72,7 @@ function handleCheck(completed) {
     if (completed) {
       todoCounter.updateCompleted(false);
     }
+    todoCounter.updateTotal(false);
   }
 
 const todoCounter = new TodoCounter(initialTodos, ".counter__text");
